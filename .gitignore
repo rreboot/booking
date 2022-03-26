@@ -1,1 +1,8 @@
 .venv/
+*.dtmp
+__pycache__/
+.pytest_cache
+.env
+**/.coverage
+.mypy_cache
+.DS_Store
