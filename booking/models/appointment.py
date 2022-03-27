@@ -14,4 +14,4 @@ class Appointment(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     scheduled_at = Column(DateTime(timezone=True))
 
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
