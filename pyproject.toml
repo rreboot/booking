@@ -8,8 +8,6 @@ authors = ["reboot"]
 python = "^3.9"
 fastapi = {extras = ["all"], version = "^0.75.0"}
 SQLAlchemy = "^1.4.32"
-asyncpg = "^0.25.0"
-fastapi-users = {extras = ["sqlalchemy2"], version = "^9.3.0"}
 alembic = "^1.7.7"
 psycopg2-binary = "^2.9.3"
 
