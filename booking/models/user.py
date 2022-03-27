@@ -1,7 +1,12 @@
-from fastapi_users.db import SQLAlchemyBaseUserTable
+from sqlalchemy import Boolean, Column, Integer, String
 
 from booking.database import Base
 
 
-class UserTable(Base, SQLAlchemyBaseUserTable):
-    pass
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
