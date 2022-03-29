@@ -11,7 +11,8 @@
       "module": "uvicorn",
       "args": ["booking.main:app", "--port", "10000", "--reload"],
       "jinja": true,
-      "justMyCode": true
+      "justMyCode": true,
+      "console": "integratedTerminal"
     }
   ]
 }
