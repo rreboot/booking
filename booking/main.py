@@ -42,7 +42,7 @@ def create_appointment(
     appointment: schemas.AppointmentCreate,
     user_id: Optional[int],
     db: Session = Depends(get_db)
-    ):
+):
     return crud.create_appointment(db, appointment, user_id)
 
 
@@ -50,3 +50,14 @@ def create_appointment(
 def read_appointments(db: Session = Depends(get_db)):
     appointments = crud.get_appointments(db)
     return appointments
+
+
+@app.get('/complex_list/', response_model=list[schemas.Complex])
+def read_complex_list(db: Session = Depends(get_db)):
+    complex_list = crud.get_complex_list(db)
+    return complex_list
+
+
+@app.post('/complex/', response_model=schemas.Complex)
+def create_complex(complex: schemas.ComplexCreate, db: Session = Depends(get_db)):
+    return crud.create_complex(db, complex)

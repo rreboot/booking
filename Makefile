@@ -6,5 +6,5 @@
 alembic.makemigrations:
 	alembic revision --autogenerate -m "$(M)"
 
-alemgic.upgrade:
+alembic.upgrade:
 	alembic upgrade head
