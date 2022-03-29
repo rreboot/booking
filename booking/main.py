@@ -1,34 +1,22 @@
 from typing import Optional
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import APIRouter, Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
 from booking import crud, schemas
-from booking.database import SessionLocal
+from booking.api.api_v1.api import api_router
+from booking.api.deps import get_db
 
-app = FastAPI()
-
-
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+root_router = APIRouter()
+app = FastAPI(title='Booking API')
 
 
 @app.get('/')
 async def root():
     return {'message': 'Hello World'}
 
-
-@app.post('/users/', response_model=schemas.User)
-def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = crud.get_user_by_email(db, email=user.email)
-    if db_user:
-        raise HTTPException(status_code=400, detail='Email already registered')
-    return crud.create_user(db=db, user=user)
+app.include_router(api_router)
+app.include_router(root_router)
 
 
 @app.get('/users/', response_model=list[schemas.User])
