@@ -24,7 +24,6 @@ async def get_current_user(db: Session = Depends(get_db), token: str = Depends(o
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        # email: str = payload.get("sub")
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception
@@ -32,7 +31,8 @@ async def get_current_user(db: Session = Depends(get_db), token: str = Depends(o
     except JWTError:
         raise credentials_exception
 
-    user = db.query(models.User).filter(models.User.username == token_data.username).first()
+    user = db.query(models.User).filter(models.User.id == token_data.username).first()
+
     if user is None:
         raise credentials_exception
     return user
