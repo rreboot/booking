@@ -13,7 +13,7 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return users
 
 
-@router.get("/me", response_model=schemas.User)
+@router.get('/me', response_model=schemas.User)
 def read_users_me(current_user: schemas.User = Depends(get_current_user)):
     user = current_user
     return user

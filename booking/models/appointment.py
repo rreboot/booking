@@ -1,7 +1,15 @@
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Table
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from booking.database import Base
+
+appointment_complex = Table(
+    'appointment_complex',
+    Base.metadata,
+    Column('appointment_id', ForeignKey('appointments.id'), primary_key=True),
+    Column('complex_id', ForeignKey('complex.id'), primary_key=True)
+)
 
 
 class Appointment(Base):
@@ -15,3 +23,4 @@ class Appointment(Base):
     scheduled_at = Column(DateTime(timezone=True))
 
     user_id = Column(Integer, ForeignKey('users.id'))
+    complex = relationship("Complex", secondary=appointment_complex, backref='appointments')

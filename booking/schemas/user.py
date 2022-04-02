@@ -2,14 +2,13 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from booking.schemas.appointment import Appointment
-
 
 class UserBase(BaseModel):
     username: str
     first_name: Optional[str]
     last_name: Optional[str]
     email: str
+    phone: str
 
 
 class UserCreate(UserBase):
@@ -19,7 +18,6 @@ class UserCreate(UserBase):
 class User(UserBase):
     id: int
     is_active: bool
-    appointments: list[Appointment] = []
 
     class Config:
         orm_mode = True
